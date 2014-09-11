@@ -15,13 +15,12 @@ d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
 d-i partman-lvm/confirm boolean true
 d-i partman-lvm/confirm_nooverwrite boolean true
-
-d-i partman-auto/init_automatically_partition \\
-	select Guided - use entire disk and set up LVM
+d-i partman-basicmethods/method_only  boolean false
 
 d-i partman-auto-lvm/guided_size string max
 d-i partman-auto-lvm/new_vg_name string vg00
 
+d-i partman-auto/choose_recipe select boot-root
 d-i partman-auto/expert_recipe string                         \\
       boot-root ::                                            \\
               64 128 128 ext3                                 \\
