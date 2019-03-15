@@ -69,6 +69,12 @@ handle_zypp_res_codes () {
 
   if [ "${ZYPP_RES_CODES[$RETVAL]}" != "" ]; then
     echo ${ZYPP_RES_CODES[$RETVAL]}
+
+    # Set flag for later usage in katello tracer upload
+    if [ "$RETVAL" == "102" ]; then
+        touch /var/run/reboot-needed
+    fi
+
     RETVAL=0
   fi
   return $RETVAL
