@@ -12,6 +12,8 @@ oses:
 <%
   major = @host.operatingsystem.major.to_i
   mac = @host.provision_interface.mac
+  proxy_uri = host_param('http-proxy') ? "http://#{host_param('http-proxy')}:#{host_param('http-proxy-port')}" : nil
+  proxy_string = proxy_uri ? " proxy=#{proxy_uri}" : ''
 
   # Tell Anaconda to perform network functions with boot interface
   #  both current and legacy syntax provided
@@ -70,7 +72,7 @@ ONTIMEOUT installer
 LABEL installer
   MENU LABEL <%= template_name %>
   KERNEL <%= @kernel %>
-  APPEND initrd=<%= @initrd %> ks=<%= foreman_url('provision') %> <%= pxe_kernel_options %> <%= ksoptions %>
+  APPEND initrd=<%= @initrd %> ks=<%= foreman_url('provision') %> <%= pxe_kernel_options %> <%= ksoptions %> <%= proxy_string %>
   IPAPPEND 2
 
 <%= snippet_if_exists(template_name + " custom menu") %>
