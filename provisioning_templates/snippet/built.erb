@@ -22,7 +22,7 @@ snippet: true
     curl_opts << "--data @#{@body_file}"
     wget_opts << "--body-file=#{@body_file}"
   end
-  if not host_param('http-proxy')
+  unless host_param('http-proxy')
     curl_opts << '--noproxy \*'
     wget_opts << '--no-proxy'
   end
