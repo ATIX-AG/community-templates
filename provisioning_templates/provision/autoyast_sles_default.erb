@@ -207,6 +207,7 @@ cp /etc/resolv.conf /mnt/etc
 /bin/hostname <%= @host.name %>
 
 <%= snippet('remote_execution_ssh_keys') %>
+<%= snippet('ssh_authorized_keys') %>
 
 <%= snippet "blacklist_kernel_modules" %>
 
